@@ -7,3 +7,5 @@
 
 # Python stuff
 __pycache__/
+
+node_modules/
