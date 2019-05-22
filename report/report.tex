@@ -76,6 +76,7 @@ Expressed as CNF:
 
 \begin{itemize}
   \item for each $i \in 0 \dots k\,: \bigvee_{v \in V} x_{i,v}$
+  \item for each $i,j \in 0 \dots k$ where $i \neq j$, and for each $v \in V$: $\lnot x_{i,v} \lor \lnot x_{j,v}$
   \item for each $i,j \in 0 \dots k$ where $i \neq j$, and for each two vertices $v$, $w$ where no edge $e \in E$ connecting $v$ and $w$ exists and $v \neq w$: $\lnot x_{i,v} \lor \lnot x_{j,w}$
   \item for each $i \in 0 \dots k$ and for each two vertices $v$, $w$ where $v \neq w$: $\lnot x_{i,v} \lor \lnot x_{i,w}$
 \end{itemize}

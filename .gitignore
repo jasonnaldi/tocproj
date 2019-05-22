@@ -5,6 +5,11 @@
 *.swo
 *.swp
 
+# TeX
+
+*.aux
+*.log
+
 # Python stuff
 __pycache__/
 
