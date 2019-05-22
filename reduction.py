@@ -82,32 +82,32 @@ if __name__ == '__main__':
     lines = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE).stdout.read().decode().split()
     issat = lines[0] == "SAT"
 
-    if len(sys.argv) <= 2 and not issat:
-        print("UNSAT")
 
     # Output data as graphviz graph
     gviz = "graph {\n"
-    thenodes = []
+    clique = []
 
     if issat:
         # If SAT (k-clique exists), draw clique
-        clique = []
+        satclique = []
 
         for i in range(1, len(lines)):
             if (int(lines[i]) > 0):
-                clique.append(i % k)
+                satclique.append(i % k)
 
-        for i in range(0, len(clique)):
-            for j in range(i + 1, len(clique)):
+        for i in range(0, len(satclique)):
+            for j in range(i + 1, len(satclique)):
                 if adjMatrix[i][j]:
-                    if i not in thenodes:
-                        thenodes.append(i)
-                    if j not in thenodes:
-                        thenodes.append(j)
+                    if i not in clique:
+                        clique.append(i)
+                    if j not in clique:
+                        clique.append(j)
 
-                    if len(sys.argv) > 2:
-                        gviz += "  " + str(i) + " -- " + str(j) + "[color=red, penwidth=3.0];\n"
-                        adjMatrix[i][j] = False # Do this so in printing we don't need to check again whether edge is in clique
+                    gviz += "  " + str(i) + " -- " + str(j) + "[color=red, penwidth=3.0];\n"
+                    adjMatrix[i][j] = False # Do this so in printing we don't need to check again whether edge is in clique
+
+    else:
+        print("UNSAT")
 
     for i in range(0, n):
         for j in range(i, n):
@@ -116,11 +116,11 @@ if __name__ == '__main__':
 
     gviz += "}\n"
 
-    for i in range(0, len(thenodes)):
-        print(thenodes[i])
+    for i in range(0, len(clique)):
+        print(clique[i])
 
     # More junk to get the output graph as an image whose name is the input file name with ".png" extension
-    cmd = 'dot -Tpng -o ' + sys.argv[1] + '.png 2> /dev/null'
+    cmd = 'dot -Tpng -o ' + (sys.argv[1] if len(sys.argv) < 3 else sys.argv[2]) + '.png 2> /dev/null'
     pipe = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
     pipe.communicate(input=str.encode(gviz))
 

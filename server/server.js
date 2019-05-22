@@ -1,3 +1,5 @@
+#!/usr/bin/node
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const {PythonShell} = require("python-shell");
@@ -25,18 +27,20 @@ app.post('/generate', function (req, res) {
 
   let options = {
     mode: 'text',
-    pythonPath: '/usr/local/bin/python3',
+    pythonPath: 'python3',
     encoding: 'utf8',
     pythonOptions: ['-u'], // get print results in real-time
     scriptPath: './',
-    args: ['input.txt']
+    args: ['input.txt', './public/img/graph']
   };
 
-  PythonShell.run('reduction.py', options, function (err, results) {
+  PythonShell.run('../reduction.py', options, function (err, results) {
     if (err)  {
+      console.log('error minisat');
       res.render('index',{output: err, data:req.body.data});
       return;
     }
+    console.log('got minisat', results);
     // exec('./minisat_release ./output.txt ./output2.txt', (err) => {
     //   if(err) {
     //     return console.log(err);
@@ -50,6 +54,6 @@ app.post('/generate', function (req, res) {
   });
 });
 
-app.listen(process.env.PORT || 5000, function () {
-  console.log('App listening on port 5000!')
+app.listen(process.env.PORT || 5001, function () {
+  console.log('App listening on port 5001!')
 });
