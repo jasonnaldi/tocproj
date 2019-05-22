@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8"/>
     <title>JavaScript: Save contents of text box to local file</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <style type="text/css">
     </style>
 </head>
@@ -17,33 +18,36 @@
         </div>
     </header>
     <div class="container">
-        <%if(data === ""){%>
+        <div class="float-left">
+            <%if(data === ""){%>
+                <form method="post" action="/generate">
+                    <textarea id="values" name="data" rows="30vh" cols="80vh"></textarea>
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </form>
+            <%}else{%>
             <form method="post" action="/generate">
-                <textarea id="values" name="data" rows="30vh" cols="80vh"></textarea>
+                <textarea id="values" name="data" rows="20vh" cols="80vh"><%-data%></textarea>
                 <input type="submit" value="Submit" class="btn btn-primary">
             </form>
-        <%}else{%>
-            <form method="post" action="/generate">
-                    <textarea id="values" name="data" rows="20vh" cols="80vh"><%-data%></textarea>
-                <input type="submit" value="Submit" class="btn btn-primary">
-        </form>
-        <%}%>
-
-        <%if(output === ""){%>
-
-            <img src = "/img/graph.png" />
-
-        <%}else{%>
+            <%}%>
+        </div>
+        <div class="float-right">
+            <%if(output === ""){%>
+                <img src = "/img/graph.png" />
+            <%}else{%>
             <%=output%>
 
             <!--<img src = "../public/img/hqdefault.jpg" />-->
 
-        <%}%>
+            <%}%>
+
+        </div>
 
 
     </div>
 </div>
-<script src="http://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 <script>
 </script>

@@ -25,7 +25,7 @@ app.post('/generate', function (req, res) {
 
   let options = {
     mode: 'text',
-    pythonPath: '/anaconda3/bin/python3',// '/usr/local/bin/python3','
+    pythonPath: '/usr/local/bin/python3',
     encoding: 'utf8',
     pythonOptions: ['-u'], // get print results in real-time
     scriptPath: './',
