@@ -17,7 +17,8 @@ app.get('/', function (req, res) {
 app.post('/generate', function (req, res) {
   fs.writeFile("input.txt", req.body.data, function(err) {
     if(err) {
-      return console.log(err);
+      res.render('index',{output: err, data:req.body.data});
+      return
     }
     console.log("The file was saved!");
   });
@@ -31,14 +32,21 @@ app.post('/generate', function (req, res) {
     args: ['input.txt']
   };
 
-  PythonShell.run('dimacs.py', options, function (err) {
+  PythonShell.run('reduction.py', options, function (err, results) {
     if (err)  {
       res.render('index',{output: err, data:req.body.data});
       return;
     }
-    exec('./minisat_release ./output.txt ./output2.txt', () => {
-      res.render('index',{output: "", data: req.body.data});
-    });
+    // exec('./minisat_release ./output.txt ./output2.txt', (err) => {
+    //   if(err) {
+    //     return console.log(err);
+    //   }
+    if(results == "UNSAT") {
+        res.render('index',{output: results, data: req.body.data});
+        return
+    }
+    res.render('index',{output: "", data: req.body.data});
+    // });
   });
 });
 
