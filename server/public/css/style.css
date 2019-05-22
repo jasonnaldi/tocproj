@@ -16,3 +16,11 @@ label {
     margin-bottom: 10px;
 }
 
+h1 {
+    text-align: center;
+    background-color: #0099cc;
+    color: white;
+    padding: 50px 100px;
+    margin-bottom: 50px;
+
+}

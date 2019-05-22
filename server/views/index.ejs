@@ -5,29 +5,34 @@
     <title>JavaScript: Save contents of text box to local file</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <style type="text/css">
-    </style>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
 
 <div class="wrapper">
-    <header>
-        <div class="container">
-            <h1 class="col-lg-9">k-clique Graph</h1>
-        </div>
-    </header>
     <div class="container">
+        <h1>k-clique Graph</h1>
         <div class="float-left">
             <%if(data === ""){%>
                 <form method="post" action="/generate">
-                    <textarea id="values" name="data" rows="30vh" cols="80vh"></textarea>
-                    <input type="submit" value="Submit" class="btn btn-primary">
+                    <div class="float-left">
+                        <textarea id="values" name="data" rows="25vh" cols="80vh"></textarea>
+                    </div>
+
+                    <div class="float-right">
+                        <input type="submit" value="Generate" class="btn btn-primary">
+                    </div>
+
                 </form>
             <%}else{%>
             <form method="post" action="/generate">
-                <textarea id="values" name="data" rows="20vh" cols="80vh"><%-data%></textarea>
-                <input type="submit" value="Submit" class="btn btn-primary">
+                <div class="float-left">
+                    <textarea id="values" name="data" rows="25vh" cols="80vh"></textarea>
+                </div>
+                <div class="float-right">
+                    <input type="submit" value="Generate" class="btn btn-primary">
+                </div>
             </form>
             <%}%>
         </div>
